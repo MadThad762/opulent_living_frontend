@@ -49,18 +49,21 @@ export default function Nav() {
           <div className='border-t-2 border-black flex flex-col'>
             <SignedIn>
               <div className='flex flex-row justify-start items-center pt-6'>
-                <div className='h-10 w-10 rounded-full'>
+                <Link to={'/profile'} className='h-10 w-10 rounded-full'>
                   <img
                     src={user?.imageUrl}
                     alt={'profile'}
                     className='rounded-full'
                   />
-                </div>
+                </Link>
                 <div className='text-left pl-3'>
-                  <p className='text-base tracking-widest uppercase'>
+                  <Link
+                    to={'/profile'}
+                    className='text-base font-medium uppercase tracking-widest'
+                  >
                     {user?.fullName}
-                  </p>
-                  <p className='text-sm'>
+                  </Link>
+                  <p className='text-sm text-black/50'>
                     {user?.emailAddresses[0]
                       ? user?.emailAddresses[0]?.emailAddress
                       : 'No Email'}

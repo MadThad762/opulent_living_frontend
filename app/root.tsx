@@ -14,6 +14,7 @@ import {
   ClerkCatchBoundary,
   V2_ClerkErrorBoundary,
 } from '@clerk/remix';
+import Footer from './components/elements/Footer';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet },
@@ -45,6 +46,7 @@ function App() {
       </head>
       <body>
         <Outlet />
+        <Footer />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

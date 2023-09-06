@@ -7,7 +7,10 @@ export default function SignInPage() {
         appearance={{
           elements: {
             formButtonPrimary:
-              'bg-green-300 hover:bg-green-400 text-white font-bold',
+              'border-2 border-black bg-white hover:bg-black text-black hover:text-white rounded-none tracking-widest ring-2 ring-black ring-inset',
+            card: 'border-2 border-black rounded-none shadow-none',
+            formFieldInput: 'rounded-none',
+            socialButtonsBlockButton: 'rounded-none',
           },
         }}
       />
