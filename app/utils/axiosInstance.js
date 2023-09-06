@@ -1,13 +1,6 @@
 import axios from 'axios';
 
-// Set baseURL based on NODE_ENV
-let baseURL;
-
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://localhost:8000';
-} else {
-  baseURL = 'https://update_me_server.railway.com';
-}
+const baseURL = process.env.BASE_URL;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
