@@ -4,7 +4,7 @@ import { Button } from '~/components/ui/button';
 
 export default function Hero() {
   return (
-    <section className='bg-white h-auto flex flex-col max-h-screen items-center justify-center relative w-full lg:aspect-w-16 lg:aspect-h-9'>
+    <section className='bg-white h-auto flex flex-col items-center justify-center relative w-full lg:aspect-w-16 lg:aspect-h-9'>
       <div className='h-full w-full z-30 flex flex-col items-center justify-center py-32'>
         <h2 className='tracking-widest text-base balance px-6 lg:px-8 sm:text-lg text-center text-white'>
           AMERICA'S HOME <br className='sm:hidden' /> FOR LUXURY REAL ESTATE
@@ -27,7 +27,7 @@ export default function Hero() {
             className='w-8 sm:w-10 h-auto'
           />
         </div>
-        <Nav />
+        <Nav homeIsActive={true} />
       </div>
       <div className='absolute inset-0 z-20 bg-black/20'></div>
       <div className='absolute inset-0 z-10'>

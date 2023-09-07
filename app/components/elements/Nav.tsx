@@ -10,12 +10,17 @@ import {
 import { Link, useNavigate } from '@remix-run/react';
 import { SignedIn, SignedOut, useUser, useAuth } from '@clerk/remix';
 
-export default function Nav() {
+export default function Nav({
+  homeIsActive = false,
+  propertiesIsActive = false,
+  aboutIsActive = false,
+  contactIsActive = false,
+}) {
   const navItems = [
-    { name: 'HOME', href: '/' },
-    { name: 'PROPERTIES', href: '/properties' },
-    { name: 'ABOUT', href: '/about' },
-    { name: 'CONTACT', href: '/contact' },
+    { name: 'HOME', href: '/', isActive: homeIsActive },
+    { name: 'PROPERTIES', href: '/properties', isActive: propertiesIsActive },
+    { name: 'ABOUT', href: '/about', isActive: aboutIsActive },
+    { name: 'CONTACT', href: '/contact', isActive: contactIsActive },
   ];
 
   const navigate = useNavigate();
@@ -40,7 +45,14 @@ export default function Nav() {
               {navItems.map((item, index) => (
                 <li key={index} className='mb-6 text-lg tracking-widest'>
                   <SheetClose asChild>
-                    <Link to={item.href}>{item.name}</Link>
+                    <Link
+                      to={item.href}
+                      className={`${
+                        item.isActive && 'font-medium'
+                      } hover:font-medium`}
+                    >
+                      {item.name}
+                    </Link>
                   </SheetClose>
                 </li>
               ))}

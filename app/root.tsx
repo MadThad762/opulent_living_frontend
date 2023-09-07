@@ -45,8 +45,10 @@ function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
-        <Footer />
+        <div className='flex flex-col justify-between min-h-screen w-full items-start'>
+          <Outlet />
+          <Footer />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
