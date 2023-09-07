@@ -26,7 +26,7 @@ interface PropertyContainerProps {
 export default function PropertyContainer({
   properties,
   padding = 'px-6 lg:px-8',
-  margin = 'mt-32',
+  margin = 'mt-7 md:mt-20',
 }: PropertyContainerProps) {
   return (
     <section

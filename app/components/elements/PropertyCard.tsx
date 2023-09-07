@@ -22,7 +22,7 @@ interface PropertyCardProps {
 export default function PropertyCard({ property }: PropertyCardProps) {
   return (
     <div className='flex flex-col w-full h-auto'>
-      <div className='aspect-w-16 aspect-h-10 w-full h-full bg-red-300'>
+      <div className='aspect-w-16 aspect-h-10 w-full h-full'>
         <img
           src={property?.images}
           alt={property?.description}

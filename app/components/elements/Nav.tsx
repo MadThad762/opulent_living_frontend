@@ -83,12 +83,15 @@ export default function Nav({
                 </div>
               </div>
               <div className='mt-6 flex flex-col space-y-5'>
-                <Link to='/profile' className='text-sm tracking-widest'>
+                <Link
+                  to='/profile'
+                  className='text-sm tracking-widest hover:font-medium'
+                >
                   YOUR PROFILE
                 </Link>
                 <Link
                   to={'/properties/new-listing'}
-                  className='mb-6 text-sm tracking-widest'
+                  className='mb-6 text-sm tracking-widest hover:font-medium'
                 >
                   CREATE A LISTING
                 </Link>
@@ -97,7 +100,7 @@ export default function Nav({
                     signOut();
                     navigate('/');
                   }}
-                  className='text-sm tracking-widest text-left'
+                  className='text-sm tracking-widest text-left hover:font-medium'
                 >
                   SIGN OUT
                 </SheetClose>
