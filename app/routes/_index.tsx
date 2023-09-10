@@ -34,7 +34,6 @@ export const loader: LoaderFunction = async () => {
 
 export default function Index() {
   const properties = useLoaderData();
-  console.log(properties);
   return (
     <div className='mx-auto w-full'>
       <Hero />
