@@ -5,7 +5,7 @@ interface Property {
   createdBy: string;
   description: string;
   id: number;
-  images: string;
+  imageUrls: string[];
   isActive: boolean;
   isSold: boolean;
   numberOfBaths: number;
