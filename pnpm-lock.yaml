@@ -6,7 +6,7 @@ settings:
 
 dependencies:
   '@clerk/remix':
-    specifier: ^2.10.0
+    specifier: ^2.10.2
     version: 2.10.2(@remix-run/react@1.19.3)(@remix-run/server-runtime@1.19.3)(react-dom@18.2.0)(react@18.2.0)
   '@radix-ui/react-dialog':
     specifier: ^1.0.4

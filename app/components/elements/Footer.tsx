@@ -7,7 +7,6 @@ const navigation = {
     { name: 'PROPERTIES', href: '/properties' },
     { name: 'ABOUT', href: '/about' },
     { name: 'CONTACT', href: '/contact' },
-    { name: 'PROFILE', href: '/profile' },
   ],
   social: [
     {

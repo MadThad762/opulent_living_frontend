@@ -48,7 +48,7 @@ export default function Nav({
                     <Link
                       to={item.href}
                       className={`${
-                        item.isActive && 'font-medium'
+                        item.isActive && 'font-semibold hover:font-semibold'
                       } hover:font-medium`}
                     >
                       {item.name}
