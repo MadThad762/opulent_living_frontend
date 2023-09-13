@@ -1,14 +1,18 @@
 // example of using a loader function to fetch data from an API
 export const loader: LoaderFunction = async (args) => {
   try {
-    const { userId, getToken } = await getAuth(args);
+    const { userId, getToken, sessionId } = await getAuth(args);
+
     if (!userId) {
-      return redirect('/sign-in');
+      return null;
     }
+
+    const token = await getToken();
 
     const res = await fetch(`${process.env.BASE_URL}/properties`, {
       headers: {
-        Authorization: `Bearer ${await getToken()}`,
+        authorization: `${token}`,
+        sessionId: `${sessionId}`,
       },
     });
 
