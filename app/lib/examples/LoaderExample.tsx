@@ -1,5 +1,5 @@
 // example of using a loader function to fetch data from an API
-export const loader: LoaderFunction = async (args) => {
+/* export const loader: LoaderFunction = async (args) => {
   try {
     const { userId, getToken, sessionId } = await getAuth(args);
 
@@ -26,4 +26,4 @@ export const loader: LoaderFunction = async (args) => {
     console.error('An error occurred:', error);
     return null;
   }
-};
+}; */
