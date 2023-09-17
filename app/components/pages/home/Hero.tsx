@@ -4,8 +4,8 @@ import { Button } from '~/components/ui/button';
 
 export default function Hero() {
   return (
-    <section className='bg-white h-auto flex flex-col items-center justify-center relative w-full lg:aspect-w-16 lg:aspect-h-9'>
-      <div className='h-full w-full z-30 flex flex-col items-center justify-center py-32'>
+    <section className='bg-white h-auto flex flex-col items-center justify-center relative w-full'>
+      <div className='h-full w-full z-30 flex flex-col items-center justify-center py-32 sm:py-48 md:py-64 lg:py-72 xl:py-80'>
         <h2 className='tracking-widest text-base balance px-6 lg:px-8 sm:text-lg text-center text-white'>
           AMERICA'S HOME <br className='sm:hidden' /> FOR LUXURY REAL ESTATE
         </h2>
@@ -20,19 +20,19 @@ export default function Hero() {
         </Button>
       </div>
       <div className='absolute top-0 left-0 w-full max-h-20 flex justify-between px-6 lg:px-8 pt-6 z-40'>
-        <div className='h-auto'>
+        <Link to={'/'} className='h-auto'>
           <img
             src='/images/logos/logo_white.svg'
             alt='Opulent Living Logo'
             className='w-8 sm:w-10 h-auto'
           />
-        </div>
+        </Link>
         <Nav homeIsActive={true} />
       </div>
-      <div className='absolute inset-0 z-20 bg-black/20'></div>
+      <div className='absolute inset-0 z-20 bg-black/30'></div>
       <div className='absolute inset-0 z-10'>
         <img
-          className='object-cover object-top w-full h-full'
+          className='object-cover object-center w-full h-full'
           src='/images/hero_images/hero_mobile.webp'
           alt='A modern minimalist home with a pool.'
           srcSet='/images/hero_images/hero_mobile.webp,

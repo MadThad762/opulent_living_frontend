@@ -38,7 +38,7 @@ export default function Index() {
     <div className='mx-auto w-full'>
       <Hero />
       <PropertyContainer properties={properties} />
-      <div className='flex items-center justify-center px-6 lg:px-8 mt-16'>
+      <div className='flex items-center justify-center px-4 sm:px-6 lg:px-8 mt-16'>
         <Button asChild variant={'default'}>
           <Link to={'/properties'}>VIEW ALL HOMES</Link>
         </Button>

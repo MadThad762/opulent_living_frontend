@@ -25,12 +25,10 @@ interface PropertyContainerProps {
 
 export default function PropertyContainer({
   properties,
-  padding = 'px-6 lg:px-8',
-  margin = 'mt-7 md:mt-20',
 }: PropertyContainerProps) {
   return (
     <section
-      className={`${padding} ${margin} grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-6 lg:gap-8`}
+      className={`mt-8 sm:mt-12 lg:mt-16 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8`}
     >
       {properties?.map((property: Property) => (
         <PropertyCard key={property.id} property={property} />

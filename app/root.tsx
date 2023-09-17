@@ -46,7 +46,9 @@ function App() {
       </head>
       <body>
         <div className='flex flex-col justify-between min-h-screen w-full items-start'>
-          <Outlet />
+          <main className='flex flex-col w-full'>
+            <Outlet />
+          </main>
           <Footer />
         </div>
         <ScrollRestoration />
