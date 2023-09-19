@@ -1,26 +1,8 @@
 import PropertyCard from '~/components/elements/PropertyCard';
-
-interface Property {
-  createdAt: string;
-  createdBy: string;
-  description: string;
-  id: number;
-  imageUrls: string[];
-  isActive: boolean;
-  isSold: boolean;
-  numberOfBaths: number;
-  numberOfBeds: number;
-  price: string;
-  propertyType: string;
-  sqft: number;
-  title: string;
-  updatedAt: string;
-}
+import type { Property } from '~/types/PropertyTypes';
 
 interface PropertyContainerProps {
   properties: Property[];
-  padding?: string;
-  margin?: string;
 }
 
 export default function PropertyContainer({

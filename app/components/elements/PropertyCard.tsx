@@ -1,21 +1,5 @@
 import { Link } from '@remix-run/react';
-
-interface Property {
-  createdAt: string;
-  createdBy: string;
-  description: string;
-  id: number;
-  imageUrls: string[];
-  isActive: boolean;
-  isSold: boolean;
-  numberOfBaths: number;
-  numberOfBeds: number;
-  price: string;
-  propertyType: string;
-  sqft: number;
-  title: string;
-  updatedAt: string;
-}
+import type { Property } from '~/types/PropertyTypes';
 
 interface PropertyCardProps {
   property: Property;
@@ -35,7 +19,9 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             className='h-full w-full flex items-center justify-center'
             to={`/properties/${property?.id}`}
           >
-            <p className='text-white tracking-widest text-xl'>VIEW DETAILS</p>
+            <p className='text-white tracking-widest text-xl underline underline-offset-4'>
+              VIEW DETAILS
+            </p>
           </Link>
         </div>
       </div>
