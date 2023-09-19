@@ -2,7 +2,7 @@ import { SignIn } from '@clerk/remix';
 
 export default function SignInPage() {
   return (
-    <div className='flex h-full flex-grow w-full items-center justify-center'>
+    <div className='flex h-full flex-grow w-full items-center justify-center flex-1'>
       <SignIn
         appearance={{
           elements: {

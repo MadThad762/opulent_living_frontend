@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '~/components/ui/button';
@@ -20,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { useAuth } from '@clerk/remix';
 
 const formSchema = z.object({
   title: z.string().min(3).max(50),
@@ -47,18 +49,22 @@ const formSchema = z.object({
   sqft: z.number().min(0).max(1000000000),
 });
 
-export default function NewListingForm() {
+// start of main component
+export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
+  const [loading, setLoading] = useState(false);
+  const { sessionId, getToken } = useAuth();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
       description: '',
       imageUrls: undefined,
-      propertyType: 'house',
-      price: undefined,
-      numberOfBeds: undefined,
-      numberOfBaths: undefined,
-      sqft: undefined,
+      propertyType: undefined,
+      price: 0,
+      numberOfBeds: 0,
+      numberOfBaths: 0,
+      sqft: 0,
     },
   });
 
@@ -69,14 +75,45 @@ export default function NewListingForm() {
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
-      setValue('imageUrls', file); // You set the imageUrls field here
+      setValue('imageUrls', file);
     }
   }
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
+
+    try {
+      const formData = new FormData();
+      const token = await getToken();
+      Object.keys(values).forEach((key: string) => {
+        const value = values[key as keyof typeof values];
+        if (value instanceof File) {
+          formData.append(key, value);
+        } else {
+          formData.append(key, String(value));
+        }
+      });
+
+      const response = await fetch(`${BASE_URL}/properties`, {
+        method: 'POST',
+        headers: {
+          authorization: `${token}`,
+          sessionId: `${sessionId}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Something went wrong');
+      }
+
+      const data = await response.json();
+      console.log('Successfully submitted:', data);
+    } catch (err) {
+      console.error('Failed to submit:', err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -84,7 +121,7 @@ export default function NewListingForm() {
       <div className='flex w-full'>
         <NewListingPropertyCard property={watchedValues} />
       </div>
-      <div className='flex flex-col w-full pt-16 lg:pt-0'>
+      <div className='flex flex-col w-full pt-16 lg:pt-0 tracking-widest'>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
             <FormField
@@ -256,7 +293,9 @@ export default function NewListingForm() {
                 />
               </div>
             </div>
-            <Button type='submit'>Submit</Button>
+            <Button type='submit' disabled={loading}>
+              Submit
+            </Button>
           </form>
         </Form>
       </div>

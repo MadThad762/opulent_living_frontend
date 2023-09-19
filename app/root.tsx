@@ -46,7 +46,7 @@ function App() {
       </head>
       <body>
         <div className='flex flex-col justify-between min-h-screen w-full items-start'>
-          <main className='flex flex-col w-full'>
+          <main className='flex flex-col h-full flex-1 w-full'>
             <Outlet />
           </main>
           <Footer />

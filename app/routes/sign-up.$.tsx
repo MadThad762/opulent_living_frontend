@@ -2,7 +2,7 @@ import { SignUp } from '@clerk/remix';
 
 export default function SignUpPage() {
   return (
-    <div className='flex h-screen w-full items-center justify-center'>
+    <div className='flex h-full flex-grow w-full items-center justify-center flex-1'>
       <SignUp
         appearance={{
           elements: {

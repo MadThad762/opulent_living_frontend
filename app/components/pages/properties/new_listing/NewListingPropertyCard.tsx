@@ -25,7 +25,7 @@ export default function NewListingPropertyCard({
             />
           ) : (
             <div className='flex justify-center items-center w-full h-full bg-gray-100'>
-              <Image className='w-12 h-12 text-gray-200' />
+              <Image className='w-12 h-12 text-white' />
             </div>
           )}
         </AspectRatio>

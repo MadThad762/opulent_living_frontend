@@ -4,7 +4,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetFooter,
   SheetTrigger,
 } from '~/components/ui/sheet';
 import { Link, useNavigate } from '@remix-run/react';
@@ -111,15 +110,22 @@ export default function Nav({
               </div>
             </SignedIn>
             <SignedOut>
+              <SheetClose asChild>
+                <Link
+                  to={'/properties/new-listing'}
+                  className='mb-6 pt-6 text-sm tracking-widest hover:font-medium'
+                >
+                  CREATE A LISTING
+                </Link>
+              </SheetClose>
               <Link
                 to={'/sign-in'}
-                className='pt-6 text-sm tracking-widest text-left'
+                className='text-sm tracking-widest text-left hover:font-medium'
               >
                 SIGN IN
               </Link>
             </SignedOut>
           </div>
-          <SheetFooter></SheetFooter>
         </SheetContent>
       </Sheet>
     </div>
