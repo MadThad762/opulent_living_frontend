@@ -20,7 +20,7 @@ export default function Hero() {
             <Link to={'/properties'}>VIEW ALL PROPERTIES</Link>
           </Button>
           <Button className='mt-3 sm:mt-[30px] w-60' asChild variant={'hero'}>
-            <Link to={'/properties/new-listing'}>LIST A PROPERTY</Link>
+            <Link to={'/properties/new-listing'}>SELL A PROPERTY</Link>
           </Button>
         </div>
       </div>

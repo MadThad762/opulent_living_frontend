@@ -43,10 +43,10 @@ const formSchema = z.object({
     'parking',
     'other',
   ]),
-  price: z.number().min(0).max(1000000000),
   numberOfBeds: z.number().min(0).max(100),
   numberOfBaths: z.number().min(0).max(100),
   sqft: z.number().min(0).max(1000000000),
+  price: z.number().min(0).max(1000000000),
 });
 
 // start of main component
@@ -61,23 +61,16 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
       description: '',
       imageUrls: undefined,
       propertyType: undefined,
-      price: 0,
       numberOfBeds: 0,
       numberOfBaths: 0,
-      sqft: 0,
+      sqft: undefined,
+      price: undefined,
     },
   });
 
-  const { setValue, watch } = form;
+  const { watch } = form;
 
   const watchedValues = watch();
-
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (file) {
-      setValue('imageUrls', file);
-    }
-  }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
@@ -97,6 +90,7 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
       const response = await fetch(`${BASE_URL}/properties`, {
         method: 'POST',
         headers: {
+          // Removed 'Content-Type': 'multipart/form-data' line
           authorization: `${token}`,
           sessionId: `${sessionId}`,
         },
@@ -123,7 +117,10 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
       </div>
       <div className='flex flex-col w-full pt-16 lg:pt-0 tracking-widest'>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='space-y-8 pb-1'
+          >
             <FormField
               control={form.control}
               name='title'
@@ -162,7 +159,15 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                     <FormItem>
                       <FormLabel>IMAGE</FormLabel>
                       <FormControl>
-                        <Input type='file' onChange={handleFileChange} />
+                        <Input
+                          type='file'
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              field.onChange(file); // Use field.onChange to trigger re-validation
+                            }
+                          }}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -211,8 +216,8 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                       <FormLabel>NUMBER OF BEDS</FormLabel>
                       <FormControl>
                         <Input
-                          className='no-arrows'
                           type='number'
+                          min={0}
                           onChange={(e) =>
                             field.onChange(Number(e.target.value))
                           }
@@ -233,8 +238,8 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                       <FormLabel>NUMBER OF BATHS</FormLabel>
                       <FormControl>
                         <Input
-                          className='no-arrows'
                           type='number'
+                          min={0}
                           onChange={(e) =>
                             field.onChange(Number(e.target.value))
                           }
@@ -259,10 +264,13 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                         <Input
                           className='no-arrows'
                           type='number'
-                          onChange={(e) =>
-                            field.onChange(Number(e.target.value))
-                          }
-                          value={Number(field.value)}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            field.onChange(
+                              val === '' ? undefined : Number(val),
+                            );
+                          }}
+                          value={field.value ?? ''}
                         />
                       </FormControl>
                       <FormMessage />
@@ -281,10 +289,13 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                         <Input
                           className='no-arrows'
                           type='number'
-                          onChange={(e) =>
-                            field.onChange(Number(e.target.value))
-                          }
-                          value={Number(field.value)}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            field.onChange(
+                              val === '' ? undefined : Number(val),
+                            );
+                          }}
+                          value={field.value ?? ''}
                         />
                       </FormControl>
                       <FormMessage />
@@ -293,9 +304,11 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                 />
               </div>
             </div>
-            <Button type='submit' disabled={loading}>
-              Submit
-            </Button>
+            <div className='flex w-full items-center justify-center lg:justify-start'>
+              <Button type='submit' disabled={loading}>
+                Submit
+              </Button>
+            </div>
           </form>
         </Form>
       </div>

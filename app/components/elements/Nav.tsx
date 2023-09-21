@@ -95,7 +95,7 @@ export default function Nav({
                     to={'/properties/new-listing'}
                     className='mb-6 text-sm tracking-widest hover:font-medium'
                   >
-                    CREATE A LISTING
+                    SELL A PROPERTY
                   </Link>
                 </SheetClose>
                 <SheetClose
@@ -115,7 +115,7 @@ export default function Nav({
                   to={'/properties/new-listing'}
                   className='mb-6 pt-6 text-sm tracking-widest hover:font-medium'
                 >
-                  CREATE A LISTING
+                  SELL A PROPERTY
                 </Link>
               </SheetClose>
               <Link

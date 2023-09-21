@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'border-2 text-black border-black bg-white hover:bg-black hover:text-white',
+          'border-2 text-black border-black bg-white hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         hero: 'border-2 text-white border-white bg-transparent hover:bg-white hover:text-black',
         icon: 'bg-transparent text-white',
         destructive:

@@ -29,7 +29,7 @@ export default function NewListing() {
       <SignedIn>
         <PageTopper
           heading={'NEW LISTING'}
-          subheading={'Explore our vast selection of luxury homes and estates'}
+          subheading={'Selling a home or piece of property? We can help.'}
         >
           <img
             className='object-cover object-top w-full h-full'
