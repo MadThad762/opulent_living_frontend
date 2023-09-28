@@ -3,11 +3,10 @@ export type Property = {
   createdBy: string;
   description: string;
   id: number;
-  imageUrl: string;
-  originalImageUrl: string;
-  thumbnailUrl: string;
+  imagePublicId: string;
   isActive: boolean;
   isSold: boolean;
+  isFeatured: boolean;
   numberOfBaths: number;
   numberOfBeds: number;
   price: number;

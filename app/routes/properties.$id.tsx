@@ -34,7 +34,10 @@ export default function PropertyDetails() {
 
   return (
     <div className='mx-auto w-full'>
-      <img src={property?.imageUrl} alt={property?.description} />
+      <img
+        src={`https://res.cloudinary.com/dwfmymy4z/image/upload/w_2000,q_75/v1695873487/property_listings/${property?.imagePublicId}.jpg`}
+        alt={property?.description}
+      />
       <p>{property?.title}</p>
       <p>{property?.description}</p>
       <p>{property?.price}</p>

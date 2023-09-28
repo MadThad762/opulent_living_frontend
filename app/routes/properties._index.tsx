@@ -1,4 +1,3 @@
-import { json } from '@remix-run/node';
 import type { V2_MetaFunction, LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import PropertyContainer from '~/components/elements/PropertyContainer';
@@ -23,7 +22,13 @@ export const loader: LoaderFunction = async () => {
       return null;
     }
 
-    return json(await res.json());
+    const propertiesData = await res.json();
+    const BASE_URL = process.env.BASE_URL;
+
+    return {
+      properties: propertiesData,
+      baseURL: BASE_URL,
+    };
   } catch (error) {
     console.error('An error occurred:', error);
     return null;
@@ -31,7 +36,7 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Properties() {
-  const properties = useLoaderData();
+  const { properties, baseURL } = useLoaderData();
 
   return (
     <div className='mx-auto w-full'>
@@ -58,7 +63,7 @@ export default function Properties() {
             3840px'
         />
       </PageTopper>
-      <PropertyContainer properties={properties} />
+      <PropertyContainer properties={properties} baseURL={baseURL} />
     </div>
   );
 }
