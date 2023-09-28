@@ -13,11 +13,11 @@ export default function NewListingPropertyCard({
     <div className='flex flex-col w-full h-auto'>
       <div className='relative group w-full'>
         <AspectRatio ratio={16 / 10} className='w-full h-full'>
-          {property?.imageUrls ? (
+          {property?.imageFile ? (
             <img
               src={
-                property?.imageUrls
-                  ? URL.createObjectURL(property?.imageUrls)
+                property?.imageFile
+                  ? URL.createObjectURL(property?.imageFile)
                   : undefined
               }
               alt={property?.description}

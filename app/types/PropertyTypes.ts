@@ -3,7 +3,9 @@ export type Property = {
   createdBy: string;
   description: string;
   id: number;
-  imageUrls: string[];
+  imageUrl: string;
+  originalImageUrl: string;
+  thumbnailUrl: string;
   isActive: boolean;
   isSold: boolean;
   numberOfBaths: number;
@@ -18,7 +20,7 @@ export type Property = {
 export type NewListingProperty = {
   title: string;
   description: string;
-  imageUrls: File;
+  imageFile: File;
   propertyType:
     | 'house'
     | 'apartment'

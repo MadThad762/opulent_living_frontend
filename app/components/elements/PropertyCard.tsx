@@ -10,7 +10,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
     <div className='flex flex-col w-full h-auto'>
       <div className='relative group aspect-w-16 aspect-h-10 w-full h-full'>
         <img
-          src={property?.imageUrls[0]}
+          src={property?.thumbnailUrl}
           alt={property?.description}
           className='h-full w-full object-cover'
         />
@@ -38,7 +38,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           <span>|</span>
           <li>{property?.sqft} sqft</li>
           <span> | </span>
-          <li>A {property?.propertyType} for sale</li>
+          <li>{property?.propertyType} for sale</li>
         </ol>
         <p className='text-base font-medium'>
           {new Intl.NumberFormat('en-US', {

@@ -4,6 +4,7 @@ import * as z from 'zod';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from '@remix-run/react';
 import {
   Form,
   FormControl,
@@ -26,7 +27,7 @@ import { useAuth } from '@clerk/remix';
 const formSchema = z.object({
   title: z.string().min(3).max(50),
   description: z.string().min(3).max(500),
-  imageUrls: z.instanceof(File).refine(
+  imageFile: z.instanceof(File).refine(
     (file) => {
       return ['image/jpeg', 'image/png'].includes(file.type);
     },
@@ -53,16 +54,17 @@ const formSchema = z.object({
 export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
   const [loading, setLoading] = useState(false);
   const { sessionId, getToken } = useAuth();
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
       description: '',
-      imageUrls: undefined,
+      imageFile: undefined,
       propertyType: undefined,
-      numberOfBeds: 0,
-      numberOfBaths: 0,
+      numberOfBeds: undefined,
+      numberOfBaths: undefined,
       sqft: undefined,
       price: undefined,
     },
@@ -90,7 +92,6 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
       const response = await fetch(`${BASE_URL}/properties`, {
         method: 'POST',
         headers: {
-          // Removed 'Content-Type': 'multipart/form-data' line
           authorization: `${token}`,
           sessionId: `${sessionId}`,
         },
@@ -99,10 +100,9 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
 
       if (!response.ok) {
         throw new Error('Something went wrong');
+      } else {
+        navigate(`/properties`);
       }
-
-      const data = await response.json();
-      console.log('Successfully submitted:', data);
     } catch (err) {
       console.error('Failed to submit:', err);
     } finally {
@@ -154,17 +154,19 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
               <div className='w-full'>
                 <FormField
                   control={form.control}
-                  name='imageUrls'
+                  name='imageFile'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>IMAGE</FormLabel>
                       <FormControl>
                         <Input
                           type='file'
+                          accept='image/jpeg, image/png'
+                          max={1}
                           onChange={(e) => {
                             const file = e.target.files?.[0];
                             if (file) {
-                              field.onChange(file); // Use field.onChange to trigger re-validation
+                              field.onChange(file);
                             }
                           }}
                         />
@@ -216,12 +218,16 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                       <FormLabel>NUMBER OF BEDS</FormLabel>
                       <FormControl>
                         <Input
+                          className='no-arrows'
                           type='number'
                           min={0}
-                          onChange={(e) =>
-                            field.onChange(Number(e.target.value))
-                          }
-                          value={Number(field.value)}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            field.onChange(
+                              val === '' ? undefined : Number(val),
+                            );
+                          }}
+                          value={field.value ?? ''}
                         />
                       </FormControl>
                       <FormMessage />
@@ -238,12 +244,16 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                       <FormLabel>NUMBER OF BATHS</FormLabel>
                       <FormControl>
                         <Input
+                          className='no-arrows'
                           type='number'
                           min={0}
-                          onChange={(e) =>
-                            field.onChange(Number(e.target.value))
-                          }
-                          value={Number(field.value)}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            field.onChange(
+                              val === '' ? undefined : Number(val),
+                            );
+                          }}
+                          value={field.value ?? ''}
                         />
                       </FormControl>
                       <FormMessage />
@@ -264,6 +274,7 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                         <Input
                           className='no-arrows'
                           type='number'
+                          min={0}
                           onChange={(e) => {
                             const val = e.target.value;
                             field.onChange(
@@ -289,6 +300,7 @@ export default function NewListingForm({ BASE_URL }: { BASE_URL: string }) {
                         <Input
                           className='no-arrows'
                           type='number'
+                          min={0}
                           onChange={(e) => {
                             const val = e.target.value;
                             field.onChange(

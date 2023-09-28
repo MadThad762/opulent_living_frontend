@@ -32,5 +32,12 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function PropertyDetails() {
   const property: Property = useLoaderData();
 
-  return <div className='mx-auto w-full'>{property.id}</div>;
+  return (
+    <div className='mx-auto w-full'>
+      <img src={property?.imageUrl} alt={property?.description} />
+      <p>{property?.title}</p>
+      <p>{property?.description}</p>
+      <p>{property?.price}</p>
+    </div>
+  );
 }
